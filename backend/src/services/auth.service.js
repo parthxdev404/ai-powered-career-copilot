@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import User from "../models/user.model";
 
+
 export const registerUser = async ({ name, email, password }) => {
   const existingUser = await User.findOne({ email });
 
