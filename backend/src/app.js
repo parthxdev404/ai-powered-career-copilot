@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import authRoutes from "./routes/auth.routes.js"
+import resumeRoutes from "./routes/resume.routes.js"
 import passport, { session } from "passport";
 import './config/passport.js'
 import rateLimit from "express-rate-limit"
@@ -33,5 +34,6 @@ app.use(passport.session());
 
 
 app.use("/api/auth" , authRoutes);
+app.use("/api/resume" , resumeRoutes);
 
 export default app;
