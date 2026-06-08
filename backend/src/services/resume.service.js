@@ -1,5 +1,5 @@
-import Resume from "../models/resume.model";
-import { extractTextfromPDF } from "./parser.service";
+import Resume from "../models/resume.model.js";
+import { extractTextfromPDF } from "./parser.service.js";
 
 export const uploadResumeService = async (userId, file) => {
   const resume = await Resume.create({

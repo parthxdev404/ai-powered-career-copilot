@@ -2,38 +2,38 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
-import authRoutes from "./routes/auth.routes.js"
-import resumeRoutes from "./routes/resume.routes.js"
+import authRoutes from "./routes/auth.routes.js";
+import resumeRoutes from "./routes/resume.routes.js";
+import aiRoutes from "./routes/ai.routes.js";
 import passport, { session } from "passport";
-import './config/passport.js'
-import rateLimit from "express-rate-limit"
-
+import "./config/passport.js";
+import rateLimit from "express-rate-limit";
 
 const app = express();
 const limiter = rateLimit({
-  windowMs : 15 * 60 * 1000,
-  max : 100,
-})
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+});
 
 app.use(cors());
 app.use(express.json());
-app.use(cookieParser());                                                                        
+app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(helmet());
-app.use(limiter)
+app.use(limiter);
 app.use(
   session({
-    secret : process.env.JWT_SECRET,
-    resave : true,
-    saveUninitialized : false,
-  })
-)
+    secret: process.env.JWT_SECRET,
+    resave: true,
+    saveUninitialized: false,
+  }),
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-app.use("/api/auth" , authRoutes);
-app.use("/api/resume" , resumeRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/resume", resumeRoutes);
+app.use("/api/ai", aiRoutes);
 
 export default app;

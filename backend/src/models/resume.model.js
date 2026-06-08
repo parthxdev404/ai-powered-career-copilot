@@ -1,5 +1,3 @@
-import mongoose from "mongoose";
-
 const resumeSchema = new mongoose.Schema(
   {
     user: {
@@ -23,28 +21,13 @@ const resumeSchema = new mongoose.Schema(
       default: "",
     },
 
-    skills: [String],
-
-    experience: [String],
-
-    education: [String],
-
-    projects: [String],
-
-    aiSummary: {
-      type: String,
-      default: "",
-    },
-
     uploadStatus: {
       type: String,
       enum: ["processing", "completed", "failed"],
       default: "processing",
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
-
-const Resume = mongoose.model("Resume" , resumeSchema)
-
-export default Resume
