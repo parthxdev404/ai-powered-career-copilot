@@ -1,7 +1,7 @@
 import Resume from "../models/resume.model.js";
 import Analysis from "../models/analysis.model.js";
 
-import { analyzeResumeWithAI } from "../services/ai.service";
+import { analyzeResumeWithAI } from "../services/ai.service.js";
 
 export const analyzeResume = async (req, res) => {
   try {

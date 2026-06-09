@@ -30,7 +30,7 @@ export const login = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "strict",
-      maxAge: 15 * 16 * 1000,
+      maxAge: 15 * 60 * 1000,
     });
 
     res.cookie("refreshToken", refreshToken, {
@@ -42,8 +42,8 @@ export const login = async (req, res) => {
 
     res.json({
       success: true,
+      token : accessToken,
       user,
-      token,
     });
   } catch (error) {
     res.status(400).json({
@@ -78,5 +78,36 @@ export const refreshAccessToken = async (req, res) => {
     res.json({ accessToken: newAccessToken });
   } catch (error) {
     res.status(403).json({ message: "Token Expired" });
+  }
+};
+
+export const getUser = (req, res) => {
+  try {
+    return res.status(200).json({
+      success: true,
+      user: req.user,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export const logOut = (req, res) => {
+  try {
+    res.clearCookie("accessToken");
+    res.clearCookie("refreshToken");
+
+    return res.status(200).json({
+      success: true,
+      message: "Logged Out Successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };

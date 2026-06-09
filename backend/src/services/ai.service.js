@@ -1,4 +1,4 @@
-import hf from "../ai/clients/huggingface.client.js";
+import hf from "../ai/clients/hugginface.client.js";
 import extractJson from "../utils/extractJson.js";
 
 import { buildResumeAnalysisPrompt } from "../ai/prompts/resumeAnalysis.prompt.js";

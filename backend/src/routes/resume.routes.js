@@ -15,4 +15,4 @@ router.post(
   uploadResumeController,
 );
 
-export const router
+export default router

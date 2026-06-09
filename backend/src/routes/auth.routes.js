@@ -1,6 +1,12 @@
 import express from "express";
-import { register, login } from "../controllers/auth.controller.js";
+import {
+  register,
+  login,
+  getUser,
+  logOut,
+} from "../controllers/auth.controller.js";
 import passport from "passport";
+import { protect } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
@@ -27,5 +33,7 @@ router.get(
 
 router.post("/register", register);
 router.post("/login", login);
+router.post("/logout", protect, logOut);
+router.get("/user", getUser);
 
 export default router;

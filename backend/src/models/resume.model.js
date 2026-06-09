@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const resumeSchema = new mongoose.Schema(
   {
     user: {
@@ -31,3 +33,7 @@ const resumeSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+const Resume = new mongoose.model("Resume" , resumeSchema);
+
+export default Resume
