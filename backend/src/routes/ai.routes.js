@@ -1,5 +1,5 @@
 import express from "express";
-import { analyzeResume } from "../controllers/ai.controller.js";
+import { analyzeResume, getAnalysis } from "../controllers/ai.controller.js";
 import { protect } from "../middlewares/auth.middleware.js";
 import { validateResumeAnalysis } from "../validators/analysisValidator.js";
 import { analyzeResumeWithAI } from "../services/ai.service.js";
@@ -11,25 +11,11 @@ router.post(
   validateResumeAnalysis,
   analyzeResume,
 );
+router.get(
+  "/analyze/:resumeId",
+  protect,
+  getAnalysis,
+);
 
-router.get("/test-ai", async (req, res) => {
-  try {
-    const result =
-      await analyzeResumeWithAI(`
-      MERN Stack Developer
-      React
-      Node.js
-      MongoDB
-      Express
-      Tailwind CSS
-      `);
-
-    res.json(result);
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
-  }
-});
 
 export default router;
