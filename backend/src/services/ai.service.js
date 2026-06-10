@@ -1,7 +1,9 @@
-import hf from "../ai/clients/hugginface.client.js";
+import groq from "../ai/clients/groq.client.js";
 import extractJson from "../utils/extractJson.js";
 
-import { buildResumeAnalysisPrompt } from "../ai/prompts/resumeAnalysis.prompt.js";
+import {
+  buildResumeAnalysisPrompt,
+} from "../ai/prompts/resumeAnalysis.prompt.js";
 
 export const analyzeResumeWithAI = async (
   resumeText
@@ -10,34 +12,37 @@ export const analyzeResumeWithAI = async (
     const prompt =
       buildResumeAnalysisPrompt(resumeText);
 
-    const response = await hf.textGeneration({
-      model:
-        "mistralai/Mistral-7B-Instruct-v0.2",
+    const completion =
+      await groq.chat.completions.create({
+        model: "llama-3.3-70b-versatile",
 
-      inputs: prompt,
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are an ATS Resume Analyzer.",
+          },
+          {
+            role: "user",
+            content: prompt,
+          },
+        ],
 
-      parameters: {
-        max_new_tokens: 700,
         temperature: 0.2,
-        return_full_text: false,
-      },
-    });
 
-    if (!response?.generated_text) {
-      throw new Error(
-        "No response received from AI"
-      );
-    }
+        response_format: {
+          type: "json_object",
+        },
+      });
 
-    const parsedResponse = extractJson(
-      response.generated_text
-    );
+    const content =
+      completion.choices[0].message.content;
 
-    return parsedResponse;
+    return extractJson(content);
   } catch (error) {
     console.error(
-      "AI Analysis Error:",
-      error.message
+      "Groq Analysis Error:",
+      error
     );
 
     throw new Error(
