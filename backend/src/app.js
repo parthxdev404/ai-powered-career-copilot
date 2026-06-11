@@ -5,6 +5,7 @@ import morgan from "morgan";
 import authRoutes from "./routes/auth.routes.js";
 import resumeRoutes from "./routes/resume.routes.js";
 import aiRoutes from "./routes/ai.routes.js";
+import jobRoutes from "./routes/job.routes.js";
 import passport from "passport";
 import session from "express-session"
 import "./config/passport.js";
@@ -42,5 +43,6 @@ app.use(limiter);
 app.use("/api/auth", authRoutes);
 app.use("/api/resume", resumeRoutes);
 app.use("/api/ai", aiRoutes);
+app.use("/api/job" , jobRoutes);
 
 export default app;
