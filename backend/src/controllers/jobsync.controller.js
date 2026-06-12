@@ -38,23 +38,14 @@ export const syncJobs = async (req, res) => {
 
         await Job.create({
           title: job.title || "Unknown",
-
           company: job.company_name || "Unknown",
-
           description: cleanDescription,
-
           skills: enrichedData.skills || [],
-
           technologies: enrichedData.technologies || [],
-
           location: job.candidate_required_location || "Remote",
-
           jobType: "Full-Time",
-
           source: "remotive",
-
           sourceJobId: String(job.id),
-
           jobUrl: job.url || "",
         });
 

@@ -6,7 +6,8 @@ import authRoutes from "./routes/auth.routes.js";
 import resumeRoutes from "./routes/resume.routes.js";
 import aiRoutes from "./routes/ai.routes.js";
 import jobRoutes from "./routes/job.routes.js";
-import careerRoutes from "./routes/career.routes.js"
+import careerRoutes from "./routes/career.routes.js";
+import applicationRoutes from "./routes/application.routes.js"
 import passport from "passport";
 import session from "express-session"
 import "./config/passport.js";
@@ -46,4 +47,5 @@ app.use("/api/resume", resumeRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/job" , jobRoutes);
 app.use("/api/career" , careerRoutes);
+app.use("/api/applications" , applicationRoutes)
 export default app;
