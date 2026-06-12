@@ -40,6 +40,21 @@ const jobSchema = new mongoose.Schema(
       enum: ["Full-Time", "Part-Time", "Contract", "Internship"],
       default: "Full-Time",
     },
+    source: {
+      type: String,
+      default: "manual",
+    },
+
+    sourceJobId: {
+      type: String,
+      unique: true,
+      sparse: true,
+    },
+
+    jobUrl: {
+      type: String,
+      default: "",
+    },
 
     isActive: {
       type: Boolean,
