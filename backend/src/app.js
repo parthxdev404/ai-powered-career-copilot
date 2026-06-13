@@ -9,6 +9,7 @@ import jobRoutes from "./routes/job.routes.js";
 import careerRoutes from "./routes/career.routes.js";
 import applicationRoutes from "./routes/application.routes.js"
 import roadmapRoutes from "./routes/roadmap.routes.js"
+import improvementRoutes from "./routes/improvement.routes.js"
 import passport from "passport";
 import session from "express-session"
 import "./config/passport.js";
@@ -50,4 +51,5 @@ app.use("/api/job" , jobRoutes);
 app.use("/api/career" , careerRoutes);
 app.use("/api/applications" , applicationRoutes)
 app.use("/api/roadmap" ,roadmapRoutes)
+app.use("/api/improvement" , improvementRoutes)
 export default app;

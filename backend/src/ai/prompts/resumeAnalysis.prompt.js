@@ -35,10 +35,41 @@ ATS SCORING RULES
 
 7. Never list missing education as a weakness.
 
+8. Missing education must not reduce the ATS score.
+
+9. Strong technical projects, open-source contributions, freelance work, internships, certifications, and practical experience can compensate for the absence of formal education.
+
+10. Prioritize demonstrable skills and project quality over academic qualifications.
+
+IMPORTANT:
+
+projects must be an array of project names only.
+
+Correct:
+[
+  "Generative AI GitHub Bot",
+  "Azure Cloud Solution"
+]
+
+Incorrect:
+[
+  {
+    "name": "Generative AI",
+    "description": "..."
+  }
+]
+
+Do not return project descriptions.
+Do not return project links.
+Do not return project objects.
+
 {
   "skills": [],
   "technologies": [],
-  "projects": [],
+  "projects": [
+    "Project Name 1",
+    "Project Name 2"
+  ],
   "strengths": [],
   "weaknesses": [],
   "experienceSummary": "",
