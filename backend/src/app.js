@@ -10,6 +10,9 @@ import careerRoutes from "./routes/career.routes.js";
 import applicationRoutes from "./routes/application.routes.js"
 import roadmapRoutes from "./routes/roadmap.routes.js"
 import improvementRoutes from "./routes/improvement.routes.js"
+import interviewRoutes from "./routes/interview.routes.js"
+import interviewSessionRoutes from "./routes/interviewSession.routes.js"
+import interviewReportRoutes from "./routes/interviewReport.routes.js"
 import passport from "passport";
 import session from "express-session"
 import "./config/passport.js";
@@ -28,7 +31,9 @@ app.use(
     credentials: true,
   })
 );
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(helmet());
@@ -52,4 +57,7 @@ app.use("/api/career" , careerRoutes);
 app.use("/api/applications" , applicationRoutes)
 app.use("/api/roadmap" ,roadmapRoutes)
 app.use("/api/improvement" , improvementRoutes)
+app.use("/api/interview-prep" , interviewRoutes)
+app.use("/api/interview-session" , interviewSessionRoutes)
+app.use("/api/interview-report" , interviewReportRoutes)
 export default app;

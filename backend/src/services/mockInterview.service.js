@@ -1,15 +1,14 @@
 import groq from "../ai/clients/groq.client.js";
 import extractJson from "../utils/extractJson.js";
-import { buildInterviewPrepPrompt } from "../ai/prompts/interview.prompt.js";
+import { buildMockInterviewPrompt } from "../ai/prompts/mockInterview.prompt.js";
 
-
-export const generateInterviewPrep = async (
+export const generateMockInterview = async (
   analysis,
   matchedJobs
 ) => {
   try {
     const prompt =
-      buildInterviewPrepPrompt(
+      buildMockInterviewPrompt(
         analysis,
         matchedJobs
       );
@@ -26,7 +25,7 @@ export const generateInterviewPrep = async (
           },
         ],
 
-        temperature: 0.3,
+        temperature: 0.4,
 
         response_format: {
           type: "json_object",
@@ -39,19 +38,19 @@ export const generateInterviewPrep = async (
 
     if (!content) {
       throw new Error(
-        "No interview preparation generated"
+        "No interview questions generated"
       );
     }
 
     return extractJson(content);
   } catch (error) {
     console.error(
-      "Interview Prep Error:",
+      "Mock Interview Error:",
       error.message
     );
 
     throw new Error(
-      "Failed to generate interview preparation"
+      "Failed to generate mock interview"
     );
   }
 };

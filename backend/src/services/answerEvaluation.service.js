@@ -1,17 +1,16 @@
 import groq from "../ai/clients/groq.client.js";
 import extractJson from "../utils/extractJson.js";
-import { buildInterviewPrepPrompt } from "../ai/prompts/interview.prompt.js";
+import { buildAnswerEvaluationPrompt } from "../ai/prompts/answerEvaluation.prompt.js";
 
-
-export const generateInterviewPrep = async (
-  analysis,
-  matchedJobs
+export const evaluateAnswer = async (
+  question,
+  answer
 ) => {
   try {
     const prompt =
-      buildInterviewPrepPrompt(
-        analysis,
-        matchedJobs
+      buildAnswerEvaluationPrompt(
+        question,
+        answer
       );
 
     const response =
@@ -39,19 +38,19 @@ export const generateInterviewPrep = async (
 
     if (!content) {
       throw new Error(
-        "No interview preparation generated"
+        "No evaluation generated"
       );
     }
 
     return extractJson(content);
   } catch (error) {
     console.error(
-      "Interview Prep Error:",
+      "Answer Evaluation Error:",
       error.message
     );
 
     throw new Error(
-      "Failed to generate interview preparation"
+      "Failed to evaluate answer"
     );
   }
 };
