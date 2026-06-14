@@ -7,7 +7,8 @@ import {
 } from "../controllers/auth.controller.js";
 import passport from "passport";
 import { protect } from "../middlewares/auth.middleware.js";
-
+import { validate } from "../middlewares/validate.middleware.js";
+import { registerSchema , loginSchema } from "../validators/authValidator.js";
 const router = express.Router();
 
 router.get(
@@ -31,8 +32,8 @@ router.get(
   },
 );
 
-router.post("/register", register);
-router.post("/login", login);
+router.post("/register", validate(registerSchema), register);
+router.post("/login", validate(loginSchema),login);
 router.post("/logout", protect, logOut);
 router.get("/user", protect , getUser);
 
