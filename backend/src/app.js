@@ -13,18 +13,12 @@ import improvementRoutes from "./routes/improvement.routes.js"
 import interviewRoutes from "./routes/interview.routes.js"
 import interviewSessionRoutes from "./routes/interviewSession.routes.js"
 import interviewReportRoutes from "./routes/interviewReport.routes.js"
-import passport from "passport";
 import session from "express-session"
-import "./config/passport.js";
-import rateLimit from "express-rate-limit";
 import helmet from 'helmet'
+import { globalLimiter } from "./middlewares/rateLimiter.js";
+import { errorHandler } from "./middlewares/error.middleware.js";
 
 const app = express();
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-});
-
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
@@ -37,17 +31,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(helmet());
-app.use(limiter);
-// app.use(
-//   session({
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: false,
-//   }),
-// );
+app.use(globalLimiter);
+app.use(errorHandler)
 
-// app.use(passport.initialize());
-// app.use(passport.session());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/resume", resumeRoutes);
