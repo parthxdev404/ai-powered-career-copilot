@@ -3,6 +3,7 @@ export interface User {
     email : string,
     password : string
 }
+
 export interface RegisterData {
     name : string,
     email : string,
@@ -13,4 +14,10 @@ export interface RegisterData {
 export interface LoginData {
     email : string,
     password : string
+}
+
+export interface FormError {
+    email? : string,
+    password? : string,
+    confirmpassword? : string
 }
