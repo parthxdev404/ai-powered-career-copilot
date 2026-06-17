@@ -28,15 +28,15 @@ export const login = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: "strict",
+      secure: false,
+      sameSite: "lax",
       maxAge: 15 * 60 * 1000,
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: "strict",
+      secure: false,
+      sameSite: "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -80,12 +80,13 @@ export const refreshAccessToken = async (req, res) => {
     res.status(403).json({ message: "Token Expired" });
   }
 };
-
-export const getUser = (req, res) => {
+export const getUser = async (req, res) => {
   try {
+    const user = await User.findById(req.user._id).select("-password");
+
     return res.status(200).json({
       success: true,
-      user: req.user,
+      user,
     });
   } catch (error) {
     return res.status(500).json({
