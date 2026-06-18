@@ -1,25 +1,55 @@
-import React from "react";
-import { MoveRight } from "lucide-react";
+import background from "../assets/background.png";
 
 const Hero = () => {
   return (
-    <div className="text-6xl flex items-center flex-col gap-6 justify-center font-medium text-center h-150">
-      <h1>
-        Analyze resumes, improve ATS scores,
-        <br />
-        discover matching jobs, identify skill gaps,
-        <br />
-        and prepare for interviews with AI.
-      </h1>
-      <div>
-        <button className="group flex items-center gap-2 bg-black rounded-4xl text-lg cursor-pointer text-white p-2 px-8 mx-4">
-          Try For Free
-          <MoveRight
-            className="transition-transform duration-300 ease-in-out group-hover:translate-x-1.5"
-            size={22}
-            color="white"
-          />
-        </button>
+    <div
+      className="min-h-screen bg-cover bg-center flex items-center justify-center px-4 sm:px-6 md:px-8"
+      style={{
+        backgroundImage: `url(${background})`,
+      }}
+    >
+      <div className="text-center font-[Sora] text-black">
+        <h1 className="
+          font-bold
+          mb-4
+          leading-tight
+          text-4xl
+          sm:text-5xl
+          md:text-6xl
+          lg:text-7xl
+          xl:text-8xl
+        ">
+          THE MISSING LINK
+          <br />
+          BETWEEN{" "}
+          <span className="text-[#7D58C2]">
+            POTENTIAL
+          </span>
+          <br />
+          AND{" "}
+          <span className="text-[#7D58C2]">
+            OPPORTUNITY
+          </span>
+        </h1>
+
+        <p
+          className="
+            font-medium
+            mx-auto
+            leading-relaxed
+            text-base
+            sm:text-lg
+            md:text-xl
+            lg:text-2xl
+            max-w-xs
+            sm:max-w-xl
+            md:max-w-2xl
+            lg:max-w-4xl
+          "
+        >
+          careerForge is an ai-powered career companion that provides
+          personalized insights, guidance, and tools for professional growth.
+        </p>
       </div>
     </div>
   );

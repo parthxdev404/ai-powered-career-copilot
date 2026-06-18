@@ -1,68 +1,73 @@
-import React, { useState, useEffect } from 'react';
-import { MoveRight } from 'lucide-react'; // Adjust this import based on your icon library
-import Header from './Header';
+import { useNavigate } from "react-router-dom";
 
-export const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // If the user scrolls down more than 20px, set isScrolled to true
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    
-    // Clean up the event listener when the component unmounts
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+const Navbar = () => {
+  const navigate = useNavigate();
 
   return (
-    <>
-    <Header/>
-    <nav
-      className={`flex items-center justify-around pb-4 sticky top-0 transition-all duration-300 ease-in-out z-50 ${
-        isScrolled 
-          ? 'bg-black text-white pt-4 shadow-md' 
-          : 'bg-transparent text-black mt-4 pt-0'
-      }`}
+    <div
+      className="
+        font-[Sora]
+        flex
+        items-center
+        justify-between
+        px-4
+        sm:px-6
+        md:px-8
+        lg:px-12
+        mt-4
+        md:mt-6
+        lg:mt-8
+        absolute
+        top-0
+        left-0
+        w-full
+        z-50
+      "
     >
-      <h1 className="text-4xl">careerforge.ai</h1>
-      
-      <div className="font-medium text-lg mt-2">
-        <a className="mx-8" href="#product">
-          Product
-        </a>
-        <a className="mx-8" href="#">
-          Features
-        </a>
-        <a className="mx-8" href="#">
-          Testimonials
-        </a>
-        <a className="mx-8" href="#">
-          FAQ
-        </a>
-      </div>
+      <h1
+        className="
+          font-bold
+          text-xl
+          sm:text-2xl
+          md:text-4xl
+          lg:text-5xl
+        "
+      >
+        CAREERFORGE
+      </h1>
 
       <button
-        className={`group flex items-center gap-2 rounded-4xl text-lg cursor-pointer p-2 px-8 mx-4 transition-colors duration-300 ease-in-out ${
-          isScrolled 
-            ? 'bg-white text-black' 
-            : 'bg-black text-white'
-        }`}
+        onClick={() => navigate("/register")}
+        className="
+          bg-[#7D58C2]
+          font-bold
+          text-white
+          border-4
+          border-black
+          cursor-pointer
+          transition-all
+          shadow-[6px_6px_0px_0px_#000]
+          hover:translate-x-1
+          hover:translate-y-1
+          hover:shadow-[3px_3px_0px_0px_#000]
+
+          text-sm
+          sm:text-base
+          md:text-xl
+          lg:text-2xl
+
+          px-3
+          sm:px-4
+          md:px-5
+          lg:px-6
+
+          py-2
+        "
       >
-        Get Started
-        <MoveRight
-          className="transition-transform duration-300 ease-in-out group-hover:translate-x-1.5"
-          size={22}
-          color={isScrolled ? 'black' : 'white'}
-        />
+        GET STARTED
       </button>
-    </nav>
-    </>
+    </div>
   );
-}
+};
+
+export default Navbar;

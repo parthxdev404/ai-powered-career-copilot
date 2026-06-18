@@ -1,16 +1,19 @@
-import React from 'react'
-import { Navbar } from '../layouts/Navbar'
-import Hero from '../layouts/Hero'
-import Product from '../layouts/Product'
+import Faq from '../layouts/Faq'
 import Features from '../layouts/Features'
+import Hero from '../layouts/Hero'
+import Navbar from '../layouts/Navbar'
+import Product from '../layouts/Product'
 
 const Landing = () => {
   return (
     <>
-    <Navbar/>
+   <div className='relative min-h-screen'>
+     <Navbar/>
     <Hero/>
     <Product/>
     <Features/>
+    <Faq/>
+   </div>
     </>
   )
 }
