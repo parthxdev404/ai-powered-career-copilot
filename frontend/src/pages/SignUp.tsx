@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import signUpPageImg from "../assets/Recommendation letter-bro.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import type { RegisterData, FormError } from "../types/auth.types";
-import { registerUser } from "../services/authService";
-import { useNavigate } from "react-router-dom";
+import { registerUser, googleLogin } from "../services/authService";
 import { GoogleLogin } from "@react-oauth/google";
-import { googleLogin } from "../services/authService";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../redux/authSlice";
 
-const SignUp = () => { 
+const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState<RegisterData>({
     name: "",
     email: "",
@@ -38,64 +37,73 @@ const SignUp = () => {
     }
 
     if (formData.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters long";
+      newErrors.password =
+        "Password must be at least 8 characters long";
     }
 
     setErrors(newErrors);
 
-    if (Object.keys(newErrors).length > 0) {
-      return;
-    }
+    if (Object.keys(newErrors).length > 0) return;
 
     try {
       await registerUser(formData);
-
       navigate("/login");
     } catch (error) {
       console.error(error);
     }
   };
 
-   const handleGoogleSuccess = async (credentialResponse: any) => {
-      try {
-        const response = await googleLogin(credentialResponse.credential);
-  
-        dispatch(
-          loginSuccess({
-            user: response.user,
-            token: response.token,
-          }),
-        );
-  
-        localStorage.setItem("token", response.token);
-  
-        navigate("/dashboard");
-      } catch (error) {
-        console.error(error);
-      }
-    };
-  
+  const handleGoogleSuccess = async (
+    credentialResponse: any
+  ) => {
+    try {
+      const response = await googleLogin(
+        credentialResponse.credential
+      );
+
+      dispatch(
+        loginSuccess({
+          user: response.user,
+          token: response.token,
+        })
+      );
+
+      localStorage.setItem("token", response.token);
+
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-    <div className="flex h-screen overflow-hidden">
-      <div className="w-1/2 flex items-center justify-center font-[Poppins]">
+    <div className="max-h-[95vh] flex flex-col lg:flex-row">
+      
+      <div className="w-full lg:w-1/2 flex items-center justify-center font-[Poppins] p-4 md:p-6 ">
         <form
-          onSubmit={(e) => submitHandler(e)}
-          className="w-full max-w-md p-8 shadow-lg rounded-lg h-180"
+          onSubmit={submitHandler}
+          className="
+            w-full
+            max-w-md
+            p-6
+            border-2 border-black shadow-[6px_6px_0px_0px_#000]
+            md:p-8
+            bg-white
+          "
         >
-          <h1 className="text-3xl font-bold mb-6">
-            Hey There , great to have you{" "}
+          <h1 className="text-2xl md:text-3xl font-bold mb-6">
+            Hey There, great to have you
           </h1>
 
           <div className="mb-4">
             <label className="block mb-2">Username</label>
             <input
-              type="name"
+              type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
               placeholder="Enter your name"
-              className="w-full border rounded-lg px-4 py-2"
+              className="w-full border-2 border-black shadow-[6px_6px_0px_0px_#000] px-4 py-2"
             />
           </div>
 
@@ -107,7 +115,7 @@ const SignUp = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter your email"
-              className="w-full border rounded-lg px-4 py-2"
+              className="w-full border-2 border-black shadow-[6px_6px_0px_0px_#000] px-4 py-2"
             />
           </div>
 
@@ -119,45 +127,58 @@ const SignUp = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter your password"
-              className="w-full border rounded-lg px-4 py-2"
+              className="w-full border-2 border-black shadow-[6px_6px_0px_0px_#000] px-4 py-2 "
             />
-            {errors.password && <span>{errors.password}</span>}
+
+            {errors.password && (
+              <span className="text-red-500 text-sm">
+                {errors.password}
+              </span>
+            )}
           </div>
 
           <button
             type="submit"
-            className="w-full cursor-pointer bg-violet-500 text-white py-2 rounded-lg hover:bg-violet-600"
+            className="w-full cursor-pointer bg-violet-500 text-white py-2  hover:bg-violet-600 transition-colors border-2 border-black shadow-[6px_6px_0px_0px_#000]"
           >
             Create Account
           </button>
-          <div className="text-center mt-2">
-            <span className="text-center">
-              Already have an account ?{" "}
-              <Link className="underline" to="/login">
+
+          <div className="text-center mt-3">
+            <span>
+              Already have an account?{" "}
+              <Link
+                className="underline font-medium"
+                to="/login"
+              >
                 Login
               </Link>
             </span>
           </div>
-          <div className="text-center flex flex-wrap justify-center items-center gap-4 mt-4">
+
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-5">
             <h1>OR</h1>
-                    <GoogleLogin
-                         onSuccess={handleGoogleSuccess}
-                         onError={() => console.log("Login Failed")}
-                         theme="filled_black"
-                         shape="pill"
-                         size="large"
-                         text="continue_with"
-                       />
+
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => console.log("Login Failed")}
+              theme="filled_black"
+              shape="pill"
+              size="large"
+              text="continue_with"
+            />
           </div>
         </form>
       </div>
-      <div className="w-1/2 bg-violet-500 flex items-center justify-center">
+
+      <div className="hidden lg:flex lg:w-1/2 bg-violet-500 items-center justify-center h-screen">
         <img
           src={signUpPageImg}
-          alt="Login Illustration"
-          className="h-[80%] object-contain"
+          alt="Signup Illustration"
+          className="w-[80%] max-w-xl min-h-screen object-contain"
         />
       </div>
+
     </div>
   );
 };
