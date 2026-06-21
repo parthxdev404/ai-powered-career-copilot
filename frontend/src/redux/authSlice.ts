@@ -5,6 +5,7 @@ interface AuthState {
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
+  loading: boolean;
 }
 
 interface LoginPayload {
@@ -16,7 +17,8 @@ const token = localStorage.getItem("token");
 const initialState: AuthState = {
   user: null,
   token,
-  isAuthenticated: !!token,
+  isAuthenticated: false,
+  loading: true,
 };
 
 const authSlice = createSlice({
@@ -29,6 +31,10 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.isAuthenticated = true;
     },
+
+    finishLoading: (state) => {
+  state.loading = false;
+},
 
     loginSuccess: (state, action: PayloadAction<LoginPayload>) => {
       state.user = action.payload.user;
@@ -44,6 +50,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { loginSuccess, logout , setUser } = authSlice.actions;
+export const { loginSuccess, logout , setUser , finishLoading} = authSlice.actions;
 
 export default authSlice.reducer;

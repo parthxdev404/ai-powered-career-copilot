@@ -1,11 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import Home from "../pages/Home";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
-import Dashboard from "../pages/Dashboard";
-
-import ProtectedRoute from "./ProtectedRoute";
-import Home from "../pages/Home";
+import Resume from "../pages/Resume";
 
 const AppRoutes = () => {
   return (
@@ -17,7 +15,7 @@ const AppRoutes = () => {
 
         <Route path="/register" element={<SignUp />} />
 
-
+        <Route path="/resume" element={<Resume />} />
       </Routes>
     </BrowserRouter>
   );
