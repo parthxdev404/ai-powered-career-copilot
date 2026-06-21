@@ -42,7 +42,7 @@ export const login = async (req, res) => {
 
     res.json({
       success: true,
-      token : accessToken,
+      token: accessToken,
       user,
     });
   } catch (error) {
@@ -71,8 +71,9 @@ export const refreshAccessToken = async (req, res) => {
 
     res.cookie("accessToken", newAccessToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: "strict",
+      secure: false,
+      sameSite: "lax",
+      maxAge: 15 * 60 * 1000,
     });
 
     res.json({ accessToken: newAccessToken });

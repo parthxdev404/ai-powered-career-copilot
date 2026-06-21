@@ -17,16 +17,38 @@ export const uploadResumeController = async (req, res) => {
     });
   }
 };
-
-export const getMyResumes = async (req, res) => {
+export const getMyResumes = async (
+  req,
+  res
+) => {
   try {
     const resumes = await Resume.find({
       user: req.user._id,
     }).sort({ createdAt: -1 });
 
+    const formattedResumes = resumes.map(
+      (resume) => ({
+        _id: resume._id,
+
+        fileName:
+          resume.originalFileName,
+
+        fileUrl: `${req.protocol}://${req.get(
+          "host"
+        )}/${resume.filePath.replace(
+          /\\/g,
+          "/"
+        )}`,
+
+        size: resume.fileSize,
+
+        createdAt: resume.createdAt,
+      })
+    );
+
     return res.status(200).json({
       success: true,
-      data: resumes,
+      resumes: formattedResumes,
     });
   } catch (error) {
     return res.status(500).json({
@@ -35,7 +57,6 @@ export const getMyResumes = async (req, res) => {
     });
   }
 };
-
 
 
 export const getResumeById = async (req, res) => {

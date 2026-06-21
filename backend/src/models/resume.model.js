@@ -18,6 +18,11 @@ const resumeSchema = new mongoose.Schema(
       required: true,
     },
 
+    fileSize: {
+      type: Number,
+      required: true,
+    },
+
     extractedText: {
       type: String,
       default: "",
@@ -34,6 +39,4 @@ const resumeSchema = new mongoose.Schema(
   }
 );
 
-const Resume = new mongoose.model("Resume" , resumeSchema);
-
-export default Resume
+export default mongoose.model("Resume", resumeSchema);
