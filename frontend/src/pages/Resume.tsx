@@ -128,7 +128,7 @@ const Resume = () => {
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Upload Card */}
 
-          <div className="bg-white border rounded-xl p-6 shadow-sm">
+          <div className="bg-white border-4 p-6 shadow-sm">
             <h2 className="text-2xl font-semibold mb-6">
               Upload Resume
             </h2>
@@ -154,10 +154,10 @@ const Resume = () => {
                   handleFileChange(fakeEvent);
                 }
               }}
-              className={`border-2 border-dashed rounded-xl p-12 text-center transition ${
+              className={`border-2 border-dashed p-12 text-center transition ${
                 isDragging
                   ? "border-violet-600 bg-violet-50"
-                  : "border-gray-300"
+                  : "border-gray-700"
               }`}
             >
               <h3 className="text-lg font-medium">
@@ -178,7 +178,7 @@ const Resume = () => {
 
               <label
                 htmlFor="resumeUpload"
-                className="inline-block mt-6 bg-violet-600 text-white px-6 py-3 rounded-lg cursor-pointer hover:bg-violet-700 transition"
+                className="inline-block mt-6 uppercase border-violet-600 bg-white text-black border-4 px-6 py-3 cursor-pointer transition hover:shadow-[6px_6px_0px_0px_#000]"
               >
                 Choose File
               </label>
@@ -186,7 +186,7 @@ const Resume = () => {
 
             {resumeFile && (
               <>
-                <div className="mt-6 border rounded-lg p-4">
+                <div className="mt-6 border-4 p-4">
                   <h3 className="font-semibold text-lg">
                     Selected File
                   </h3>
@@ -203,7 +203,7 @@ const Resume = () => {
                 <button
                   onClick={handleUpload}
                   disabled={loading}
-                  className="w-full mt-4 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition"
+                  className="w-full mt-4 bg-violet-600 text-white py-3 border-4 hover:bg-violet-700 cursor-pointer transition"
                 >
                   {loading ? "Uploading..." : "Upload Resume"}
                 </button>
@@ -211,94 +211,14 @@ const Resume = () => {
             )}
           </div>
 
-          {/* Current Resume */}
-
-          <div className="bg-white border rounded-xl p-6 shadow-sm">
-            <h2 className="text-2xl font-semibold mb-6">
-              Current Resume
-            </h2>
-
-            <div className="border rounded-lg p-5">
-              <h3 className="text-xl font-semibold">
-                {currentResume
-                  ? currentResume.fileName
-                  : "No Resume Uploaded"}
-              </h3>
-
-              <p className="text-gray-500 mt-2">
-                {currentResume
-                  ? `Size: ${(currentResume.size / 1024 / 1024).toFixed(
-                      2
-                    )} MB`
-                  : "Upload a resume to continue"}
-              </p>
-
-              <div className="flex gap-4 mt-6 flex-wrap">
-                <a
-                  href={currentResume?.fileUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`px-4 py-2 rounded-lg text-white ${
-                    currentResume
-                      ? "bg-violet-600"
-                      : "bg-gray-300 pointer-events-none"
-                  }`}
-                >
-                  Preview
-                </a>
-
-                <label
-                  htmlFor="resumeUpload"
-                  className="px-4 py-2 rounded-lg text-white cursor-pointer bg-gray-700"
-                >
-                  Replace
-                </label>
-
-                <button
-                  onClick={() =>
-                    currentResume &&
-                    handleDeleteResume(currentResume._id)
-                  }
-                  disabled={!currentResume}
-                  className={`px-4 py-2 rounded-lg text-white ${
-                    currentResume
-                      ? "bg-red-600"
-                      : "bg-gray-300 cursor-not-allowed"
-                  }`}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
         </section>
 
-        {/* Preview */}
-
-        <section className="bg-white border rounded-xl p-8 shadow-sm">
-          <h2 className="text-2xl font-semibold mb-6">
-            Resume Preview
-          </h2>
-
-          <div className="h-[700px] border rounded-lg overflow-hidden">
-            {currentResume ? (
-              <iframe
-                src={currentResume.fileUrl}
-                title="Resume Preview"
-                className="w-full h-full"
-              />
-            ) : (
-              <div className="h-full flex items-center justify-center text-gray-400">
-                No Resume Uploaded
-              </div>
-            )}
-          </div>
-        </section>
+        
 
         {/* Uploaded Resumes */}
 
         {myResumes.length > 0 && (
-          <section className="bg-white border rounded-xl p-8 shadow-sm">
+          <section className="bg-white border-4 p-8 shadow-sm">
             <h2 className="text-2xl font-semibold mb-6">
               Uploaded Resumes
             </h2>
@@ -307,7 +227,7 @@ const Resume = () => {
               {myResumes.map((resume) => (
                 <div
                   key={resume._id}
-                  className="border rounded-lg p-4 flex justify-between items-center"
+                  className="border-2 p-4 flex justify-between items-center"
                 >
                   <div>
                     <h3 className="font-semibold">
@@ -324,7 +244,7 @@ const Resume = () => {
                       href={resume.fileUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="bg-violet-600 text-white px-4 py-2 rounded-lg"
+                      className="bg-violet-600 text-white px-4 py-2 "
                     >
                       View
                     </a>
@@ -333,7 +253,7 @@ const Resume = () => {
                       onClick={() =>
                         navigate(`/analysis/${resume._id}`)
                       }
-                      className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+                      className="bg-blue-600 text-white px-4 py-2 "
                     >
                       Analyze
                     </button>
@@ -342,7 +262,7 @@ const Resume = () => {
                       onClick={() =>
                         handleDeleteResume(resume._id)
                       }
-                      className="bg-red-600 text-white px-4 py-2 rounded-lg"
+                      className="bg-red-600 text-white px-4 py-2"
                     >
                       Delete
                     </button>

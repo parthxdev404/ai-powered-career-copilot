@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Resume from "../pages/Resume";
 import Analysis from "../pages/Analysis";
+import Jobs from "../pages/Job";
 
 const AppRoutes = () => {
   return (
@@ -18,10 +19,9 @@ const AppRoutes = () => {
 
         <Route path="/resume" element={<Resume />} />
         <Route path="/analysis" element={<Analysis/>}/>
-        <Route
-  path="/analysis/:resumeId"
-  element={<Analysis />}
-/>
+        <Route path="/analysis/:resumeId" element={<Analysis />}/>
+        <Route path="/jobs" element = {<Jobs/>}/>
+
       </Routes>
     </BrowserRouter>
   );

@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import type { RootState, AppDispatch } from "../redux/store";
 import { logout } from "../redux/authSlice";
 
-import Sidebar from "../layouts/Sidebad";
 import DashboardLayout from "../layouts/DashboardLayout";
 
 const Dashboard = () => {
@@ -58,38 +57,6 @@ const Dashboard = () => {
               <div className="bg-white border-4 p-6 text-center">
                 <h2 className="text-gray-700">Interviews</h2>
                 <p className="text-5xl font-bold mt-3 text-violet-600">12</p>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold mb-4">Quick Actions</h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <button className="bg-white border-4 p-6 hover:border-violet-500 transition cursor-pointer">
-                  <h3 className="font-semibold text-lg">Upload Resume</h3>
-
-                  <p className="text-gray-500 mt-2">Upload a new resume.</p>
-                </button>
-
-                <button className="bg-white border-4 p-6 hover:border-violet-500 transition cursor-pointer">
-                  <h3 className="font-semibold text-lg">Analyze Resume</h3>
-
-                  <p className="text-gray-500 mt-2">Generate ATS insights.</p>
-                </button>
-
-                <button className="bg-white border-4 p-6 hover:border-violet-500 transition cursor-pointer">
-                  <h3 className="font-semibold text-lg">Find Jobs</h3>
-
-                  <p className="text-gray-500 mt-2">Discover matching jobs.</p>
-                </button>
-
-                <button className="bg-white border-4 p-6 hover:border-violet-500 transition cursor-pointer">
-                  <h3 className="font-semibold text-lg">Practice Interviews</h3>
-
-                  <p className="text-gray-500 mt-2">
-                    Start AI mock interviews.
-                  </p>
-                </button>
               </div>
             </section>
 

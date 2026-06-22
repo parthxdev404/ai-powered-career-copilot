@@ -92,7 +92,7 @@ const Analysis = () => {
     <DashboardLayout onLogOut={handleLogout}>
       {/* Header */}
 
-      <section className="bg-white p-6 border-b">
+      <section className="bg-white p-6 border-b-4">
         <h1 className="text-3xl font-bold">
           Resume Analysis
         </h1>
@@ -103,10 +103,7 @@ const Analysis = () => {
       </section>
 
       <main className="p-6 space-y-8">
-
-        {/* ATS SCORE */}
-
-        <section className="bg-white rounded-xl border p-8 shadow-sm text-center">
+        <section className="bg-white  border-4 p-8 shadow-sm text-center">
           <h2 className="text-2xl font-semibold">
             ATS Score
           </h2>
@@ -121,12 +118,9 @@ const Analysis = () => {
             </p>
           </div>
         </section>
-
-        {/* Strengths + Weaknesses */}
-
         <section className="grid md:grid-cols-2 gap-6">
 
-          <div className="bg-white border rounded-xl p-6 shadow-sm">
+          <div className="bg-white border-4 p-6 shadow-sm">
             <h2 className="text-2xl font-semibold mb-5">
               Strengths
             </h2>
@@ -138,14 +132,14 @@ const Analysis = () => {
                     key={index}
                     className="bg-green-50 text-green-700 p-3 rounded-lg"
                   >
-                    ✓ {item}
+                   {item}
                   </li>
                 )
               )}
             </ul>
           </div>
 
-          <div className="bg-white border rounded-xl p-6 shadow-sm">
+          <div className="bg-white border-4 p-6 shadow-sm">
             <h2 className="text-2xl font-semibold mb-5">
               Weaknesses
             </h2>
@@ -157,7 +151,7 @@ const Analysis = () => {
                     key={index}
                     className="bg-red-50 text-red-700 p-3 rounded-lg"
                   >
-                    ✗ {item}
+                    {item}
                   </li>
                 )
               )}
@@ -167,7 +161,7 @@ const Analysis = () => {
 
         {/* Missing Keywords */}
 
-        <section className="bg-white border rounded-xl p-6 shadow-sm">
+        <section className="bg-white border-4 p-6 shadow-sm">
           <h2 className="text-2xl font-semibold mb-6">
             Missing Keywords
           </h2>
@@ -188,7 +182,7 @@ const Analysis = () => {
 
         {/* Section Scores */}
 
-        <section className="bg-white border rounded-xl p-6 shadow-sm">
+        <section className="bg-white border-4 p-6 shadow-sm">
           <h2 className="text-2xl font-semibold mb-6">
             Section Scores
           </h2>
@@ -219,7 +213,7 @@ const Analysis = () => {
 
         {/* Suggestions */}
 
-        <section className="bg-white border rounded-xl p-6 shadow-sm">
+        <section className="bg-white border-4 p-6 shadow-sm">
           <h2 className="text-2xl font-semibold mb-6">
             Improvement Suggestions
           </h2>
@@ -229,7 +223,7 @@ const Analysis = () => {
               (suggestion: string, index: number) => (
                 <div
                   key={index}
-                  className="border rounded-lg p-4"
+                  className="border-2 p-4"
                 >
                   <span className="font-semibold">
                     {index + 1}.
