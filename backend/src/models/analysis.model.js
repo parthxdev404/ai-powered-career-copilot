@@ -23,6 +23,16 @@ const analysisSchema = new mongoose.Schema(
     strengths: [String],
 
     weaknesses: [String],
+    missingKeywords: [String],
+
+    suggestions: [String],
+
+    sectionScores: [
+      {
+        name: String,
+        score: Number,
+      },
+    ],
 
     experienceSummary: {
       type: String,

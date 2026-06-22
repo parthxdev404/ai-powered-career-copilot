@@ -39,7 +39,7 @@ app.use(errorHandler);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/resume", resumeRoutes);
-app.use("/api/ai", aiRoutes);
+app.use("/api/analysis", aiRoutes);
 app.use("/api/job", jobRoutes);
 app.use("/api/career", careerRoutes);
 app.use("/api/applications", applicationRoutes);

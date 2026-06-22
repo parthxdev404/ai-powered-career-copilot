@@ -1,88 +1,110 @@
 export const buildResumeAnalysisPrompt = (
   resumeText
 ) => `
-You are an expert ATS and technical recruiter.
+You are a ruthless ATS evaluator, senior technical recruiter, and hiring manager.
 
-Analyze the following resume.
+Your job is to critically evaluate resumes.
 
-Return ONLY valid JSON.
+IMPORTANT RULES:
 
-ATS SCORING RULES
+- Never give high scores by default.
+- A resume must earn every point.
+- Most resumes should score between 50 and 80.
+- Only exceptional resumes should score above 90.
+- Be strict and realistic.
+- Always identify weaknesses.
+- Never return generic feedback.
+- Base every observation strictly on the resume content.
 
-1. Education is optional.
+SCORING GUIDELINES:
 
-2. Do NOT reduce the ATS score because an education section is missing.
+90-100:
+Outstanding resume with strong experience, measurable achievements, excellent projects, and ATS optimization.
 
-3. A resume without education can still receive a very high ATS score if it demonstrates strong:
-   - technical skills
-   - projects
-   - technologies
-   - experience
-   - achievements
-   - keyword relevance
+75-89:
+Strong resume with minor improvements needed.
 
-4. If education exists, treat it as a small positive signal.
+60-74:
+Average resume with noticeable gaps.
 
-5. If education does not exist, simply ignore it.
+40-59:
+Weak resume with multiple issues.
 
-6. Focus scoring primarily on:
-   - skills
-   - projects
-   - technologies
-   - experience
-   - resume structure
-   - keyword optimization
+0-39:
+Poor resume lacking technical depth and structure.
 
-7. Never list missing education as a weakness.
+Education Rules:
 
-8. Missing education must not reduce the ATS score.
+- Education is optional.
+- Missing education must NOT reduce ATS score.
+- Strong projects and practical experience compensate for missing education.
+- Never list missing education as a weakness.
 
-9. Strong technical projects, open-source contributions, freelance work, internships, certifications, and practical experience can compensate for the absence of formal education.
+Evaluate the following sections separately:
 
-10. Prioritize demonstrable skills and project quality over academic qualifications.
+1. Skills
+2. Projects
+3. Experience
+4. Resume Structure
+5. ATS Keyword Optimization
 
-IMPORTANT:
-
-projects must be an array of project names only.
-
-Correct:
-[
-  "Generative AI GitHub Bot",
-  "Azure Cloud Solution"
-]
-
-Incorrect:
-[
-  {
-    "name": "Generative AI",
-    "description": "..."
-  }
-]
-
-Do not return project descriptions.
-Do not return project links.
-Do not return project objects.
+Return ONLY valid JSON in this exact format:
 
 {
+  "atsScore": 0,
+
   "skills": [],
+
   "technologies": [],
-  "projects": [
-    "Project Name 1",
-    "Project Name 2"
-  ],
+
+  "projects": [],
+
   "strengths": [],
+
   "weaknesses": [],
+
+  "missingKeywords": [],
+
+  "suggestions": [],
+
   "experienceSummary": "",
+
   "aiSummary": "",
-  "atsScore": 0
+
+  "sectionScores": [
+    {
+      "name": "Skills",
+      "score": 0
+    },
+    {
+      "name": "Projects",
+      "score": 0
+    },
+    {
+      "name": "Experience",
+      "score": 0
+    },
+    {
+      "name": "Resume Structure",
+      "score": 0
+    },
+    {
+      "name": "ATS Keywords",
+      "score": 0
+    }
+  ]
 }
 
-Rules:
-- atsScore must be between 0 and 100
-- Return only JSON
-- No markdown
-- No explanation
-- No extra text
+Requirements:
+
+- strengths: minimum 3 items.
+- weaknesses: minimum 5 items.
+- missingKeywords: minimum 5 items.
+- suggestions: minimum 5 items.
+- projects must contain only project names.
+- Do not return markdown.
+- Do not explain anything.
+- Return JSON only.
 
 Resume:
 

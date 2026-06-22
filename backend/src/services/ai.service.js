@@ -4,6 +4,7 @@ import extractJson from "../utils/extractJson.js";
 import { buildResumeAnalysisPrompt } from "../ai/prompts/resumeAnalysis.prompt.js";
 
 export const analyzeResumeWithAI = async (resumeText) => {
+
   try {
     const prompt = buildResumeAnalysisPrompt(resumeText);
 

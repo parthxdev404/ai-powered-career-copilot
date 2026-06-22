@@ -2,6 +2,7 @@ import Resume from "../models/resume.model.js";
 import Analysis from "../models/analysis.model.js";
 
 import { analyzeResumeWithAI } from "../services/ai.service.js";
+import { calculateResumeScore } from "../utils/calculateResumeScore.js";
 
 export const analyzeResume = async (req, res) => {
   try {
@@ -10,7 +11,7 @@ export const analyzeResume = async (req, res) => {
     const resume = await Resume.findById(resumeId);
 
     if (!resume) {
-      return res.json(404).json({
+      return res.status(404).json({
         success: false,
         message: "Resume not found",
       });
@@ -28,7 +29,19 @@ export const analyzeResume = async (req, res) => {
       });
     }
 
-    const aiResult = await analyzeResumeWithAI(resume.extractedText);
+    // Generate AI analysis
+
+    const aiResult = await analyzeResumeWithAI(
+      resume.extractedText
+    );
+
+    // Calculate ATS + Section Scores
+
+    const { atsScore, sectionScores } =
+      calculateResumeScore(aiResult);
+
+    // Save Analysis
+
     const analysis = await Analysis.create({
       user: resume.user,
       resume: resume._id,
@@ -36,17 +49,34 @@ export const analyzeResume = async (req, res) => {
       skills: aiResult.skills || [],
       technologies: aiResult.technologies || [],
       projects: aiResult.projects || [],
+
       strengths: aiResult.strengths || [],
       weaknesses: aiResult.weaknesses || [],
-      experienceSummary: aiResult.experienceSummary || "",
-      aiSummary: aiResult.aiSummary || "",
-      atsScore: aiResult.atsScore || 0,
+
+      missingKeywords:
+        aiResult.missingKeywords || [],
+
+      suggestions:
+        aiResult.suggestions || [],
+
+      sectionScores,
+
+      experienceSummary:
+        aiResult.experienceSummary || "",
+
+      aiSummary:
+        aiResult.aiSummary || "",
+
+      atsScore,
     });
+
     return res.status(201).json({
       success: true,
       data: analysis,
     });
   } catch (error) {
+    console.error("Analysis Error:", error);
+
     return res.status(500).json({
       success: false,
       message: error.message,
@@ -73,6 +103,8 @@ export const getAnalysis = async (req, res) => {
       data: analysis,
     });
   } catch (error) {
+    console.error("Get Analysis Error:", error);
+
     return res.status(500).json({
       success: false,
       message: error.message,
