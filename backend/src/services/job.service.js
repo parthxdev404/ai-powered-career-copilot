@@ -58,10 +58,13 @@ export const getMatchedJobs = async (
       );
 
     return {
-      job,
-      score: result.score,
+      ...job.toObject(),
+
+      matchScore: result.score,
+
       matchedSkills:
         result.matchedSkills,
+
       missingSkills:
         result.missingSkills,
     };
@@ -70,14 +73,15 @@ export const getMatchedJobs = async (
   const filteredMatches =
     matches.filter(
       (match) =>
-        match.score >=
+        match.matchScore >=
         MIN_MATCH_SCORE
     );
 
   return filteredMatches
     .sort(
       (a, b) =>
-        b.score - a.score
+        b.matchScore -
+        a.matchScore
     )
     .slice(0, 10);
 };

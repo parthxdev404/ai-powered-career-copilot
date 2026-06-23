@@ -5,7 +5,7 @@ import { cleanJobDescription } from "../utils/cleanDescription.js";
 
 export const syncJobs = async (req, res) => {
   try {
-    const jobs = (await fetchRemotiveJobs()).slice(0, 5);
+    const jobs = (await fetchRemotiveJobs()).slice(0, 14);
 
     let inserted = 0;
     let skipped = 0;
