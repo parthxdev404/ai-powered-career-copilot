@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/authSlice";
 import { useNavigate, useParams } from "react-router-dom";
@@ -90,7 +90,6 @@ const Analysis = () => {
 
   return (
     <DashboardLayout onLogOut={handleLogout}>
-      {/* Header */}
 
       <section className="bg-white p-6 border-b-4">
         <h1 className="text-3xl font-bold">
@@ -159,7 +158,6 @@ const Analysis = () => {
           </div>
         </section>
 
-        {/* Missing Keywords */}
 
         <section className="bg-white border-4 p-6 shadow-sm">
           <h2 className="text-2xl font-semibold mb-6">
@@ -180,7 +178,6 @@ const Analysis = () => {
           </div>
         </section>
 
-        {/* Section Scores */}
 
         <section className="bg-white border-4 p-6 shadow-sm">
           <h2 className="text-2xl font-semibold mb-6">
@@ -211,7 +208,6 @@ const Analysis = () => {
           </div>
         </section>
 
-        {/* Suggestions */}
 
         <section className="bg-white border-4 p-6 shadow-sm">
           <h2 className="text-2xl font-semibold mb-6">

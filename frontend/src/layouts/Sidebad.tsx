@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -42,7 +42,7 @@ const Sidebar = ({ onLogOut }: SidebarProps) => {
   {
     name: "Career Insights",
     icon: Target,
-    path: "/insights",
+    path: "/career",
   },
   {
     name: "Interview Prep",

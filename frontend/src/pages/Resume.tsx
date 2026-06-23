@@ -109,8 +109,8 @@ const Resume = () => {
     navigate("/");
   };
 
-  const currentResume =
-    myResumes.length > 0 ? myResumes[0] : null;
+  // const currentResume =
+  //   myResumes.length > 0 ? myResumes[0] : null;
 
   return (
     <DashboardLayout onLogOut={handleLogout}>
@@ -126,7 +126,6 @@ const Resume = () => {
 
       <main className="p-6 space-y-8">
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Upload Card */}
 
           <div className="bg-white border-4 p-6 shadow-sm">
             <h2 className="text-2xl font-semibold mb-6">
@@ -212,11 +211,6 @@ const Resume = () => {
           </div>
 
         </section>
-
-        
-
-        {/* Uploaded Resumes */}
-
         {myResumes.length > 0 && (
           <section className="bg-white border-4 p-8 shadow-sm">
             <h2 className="text-2xl font-semibold mb-6">

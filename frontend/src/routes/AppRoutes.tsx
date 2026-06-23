@@ -6,22 +6,20 @@ import SignUp from "../pages/SignUp";
 import Resume from "../pages/Resume";
 import Analysis from "../pages/Analysis";
 import Jobs from "../pages/Job";
+import CareerInsights from "../pages/CareerInsights";
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-
         <Route path="/login" element={<Login />} />
-
         <Route path="/register" element={<SignUp />} />
-
         <Route path="/resume" element={<Resume />} />
-        <Route path="/analysis" element={<Analysis/>}/>
-        <Route path="/analysis/:resumeId" element={<Analysis />}/>
-        <Route path="/jobs" element = {<Jobs/>}/>
-
+        <Route path="/analysis" element={<Analysis />} />
+        <Route path="/analysis/:resumeId" element={<Analysis />} />
+        <Route path="/jobs" element={<Jobs />} />
+        <Route path="/career" element={<CareerInsights />} />
       </Routes>
     </BrowserRouter>
   );
