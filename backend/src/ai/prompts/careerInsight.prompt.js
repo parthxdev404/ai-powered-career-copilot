@@ -1,16 +1,22 @@
 export const buildCareerInsightPrompt = (
   analysis
-) => {
-  return `
-You are an expert AI Career Coach.
+) => `
+You are an expert Career Coach, Senior Technical Recruiter and Software Engineering Mentor.
 
-Analyze the following candidate profile and return ONLY valid JSON.
+Analyze this candidate profile carefully.
 
-Candidate Analysis:
+IMPORTANT:
+
+- Use ONLY the information provided.
+- Never give generic answers.
+- Every recommendation must be based on the candidate's actual skills, technologies, projects and weaknesses.
+- Different candidates MUST receive different outputs.
+
+Candidate Data:
 
 ${JSON.stringify(analysis, null, 2)}
 
-Return JSON in this exact format:
+Return ONLY valid JSON.
 
 {
   "careerLevel": "",
@@ -24,28 +30,63 @@ Return JSON in this exact format:
 
 Rules:
 
-- careerLevel must be one of:
-  Beginner
-  Intermediate
-  Advanced
+1. careerLevel must be exactly one of:
 
-- strongAreas should contain strengths.
+"Beginner"
+"Intermediate"
+"Advanced"
 
-- improvementAreas should contain skills
-  or areas the candidate should improve.
+2. Strong Areas:
+- Mention actual strengths from skills/projects.
+- Example:
+[
+ "Strong React and Node.js development skills",
+ "Experience building AI-powered applications"
+]
 
-- recommendedRoles should contain
-  suitable job roles.
+3. Improvement Areas:
+- Mention missing or weak areas.
+- Example:
+[
+ "Cloud deployment experience",
+ "Testing and QA practices"
+]
 
-- learningRecommendations should contain
-  technologies or concepts to learn next.
+4. Recommended Roles:
+- Recommend ONLY suitable roles.
+- Example:
+[
+ "Frontend Developer",
+ "Full Stack Developer",
+ "React Developer"
+]
 
-- roadmap should contain step-by-step
-  career growth actions.
+5. Learning Recommendations:
+- Must directly address weaknesses.
+- Example:
+[
+ "Learn Docker and Kubernetes",
+ "Study AWS deployment"
+]
 
-- summary should be a concise
-  professional career evaluation.
+6. Roadmap:
+- Must contain actionable steps.
+- Example:
+[
+ "Improve backend architecture skills",
+ "Build and deploy a production-grade project",
+ "Contribute to open source"
+]
+
+7. Summary:
+- Give a concise professional evaluation in 3-4 sentences.
+
+8. Avoid generic recommendations like:
+- Improve communication
+- Learn more technologies
+- Gain experience
+
+unless supported by the data.
 
 Return ONLY JSON.
 `;
-};
