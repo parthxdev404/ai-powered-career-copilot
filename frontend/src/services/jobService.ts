@@ -26,9 +26,16 @@ export const getMatchedJobs = async (
 };
 
 export const syncJobs = async () => {
-  const response = await api.post(
-    "/job/sync"
-  );
+  try {
+    const response = await api.post("/job/sync");
 
-  return response.data;
+    return response?.data || null;
+  } catch (error : any) {
+    console.error(
+      "Sync Jobs API Error:",
+      error.response?.data || error.message
+    );
+
+    throw error;
+  }
 };
